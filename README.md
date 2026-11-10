@@ -1,0 +1,70 @@
+# nkspfetch
+
+Colored ASCII-art NKSP elephant banner for your terminal. One bash script, no dependencies.
+
+```
+nkspfetch --color=cyan --no-title
+```
+
+## Install
+
+```sh
+git clone https://github.com/<you>/nkspfetch.git
+cd nkspfetch
+sudo make install
+```
+
+Ставит `nkspfetch` в `/usr/local/bin`.
+
+### Без sudo (в `~/.local/bin`)
+
+```sh
+make install PREFIX=$HOME/.local
+```
+
+Убедись, что `$HOME/.local/bin` есть в `$PATH`.
+
+### Удалить
+
+```sh
+sudo make uninstall
+```
+
+## Usage
+
+```
+nkspfetch [--color=COLOR] [--title=N] [-h|--help] [-V|--version]
+```
+
+| Флаг | Описание |
+|---|---|
+| `-c, --color=COLOR` | Цвет: `red green yellow blue magenta cyan white` или ANSI-код (`31`, `1;33`, `38;5;196`). По умолчанию `red`. |
+| `-t, --title=N`     | Блок-заголовок: `1/true/yes/on` (по умолчанию) или `0/false/no/off`. |
+| `--no-title`        | То же, что `--title=0`. |
+| `-h, --help`        | Справка. |
+| `-V, --version`     | Версия. |
+
+### Примеры
+
+```sh
+nkspfetch
+nkspfetch --color=green
+nkspfetch -c cyan --no-title
+nkspfetch --color='1;33'         # жирный жёлтый
+nkspfetch --color='38;5;196'     # 256-цветный красный
+```
+
+## Разработка
+
+`nkspfetch.sh` — дев-версия, лежит в репо. `make build` собирает из неё `bin/nkspfetch` (без `.sh`), `make install` ставит его в `$PREFIX/bin`.
+
+```sh
+make bootstrap   # включить git-хук (.githooks/pre-commit)
+make build       # nkspfetch.sh -> bin/nkspfetch
+make install     # установить
+make clean       # убрать bin/
+```
+
+## Лицензия
+
+GNU-GPLv2

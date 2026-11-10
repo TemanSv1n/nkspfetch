@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+command -v shellcheck >/dev/null 2>&1 && shellcheck nkspfetch.sh
+exit 0
