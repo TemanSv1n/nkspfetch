@@ -1,6 +1,6 @@
 # nkspfetch
 
-Colored ASCII-art banner for your terminal. One bash script, no dependencies.
+Colored ASCII-art NKSP Elephant banner for your terminal. One bash script, no dependencies.
 
 ```
             #%*#%
@@ -62,7 +62,7 @@ Colored ASCII-art banner for your terminal. One bash script, no dependencies.
 ## Install
 
 ```sh
-git clone https://github.com/<you>/nkspfetch.git
+git clone https://github.com/TemanSv1n/nkspfetch.git
 cd nkspfetch
 sudo make install
 ```
@@ -75,7 +75,7 @@ sudo make install
 make install PREFIX=$HOME/.local
 ```
 
-Убедись, что `$HOME/.local/bin` есть в `$PATH`.
+Убедитесь, что `$HOME/.local/bin` есть в `$PATH`.
 
 ### Удалить
 
@@ -86,7 +86,9 @@ sudo make uninstall
 ## Usage
 
 ```
-nkspfetch [--color=COLOR] [--title=N] [-h|--help] [-V|--version]
+nkspfetch [--color=COLOR] [--title=N]
+          [--slow | --slow-chars] [--delay=SECONDS] [--char-delay=SECONDS]
+          [-h|--help] [-V|--version]
 ```
 
 | Флаг | Описание |
@@ -94,8 +96,14 @@ nkspfetch [--color=COLOR] [--title=N] [-h|--help] [-V|--version]
 | `-c, --color=COLOR` | Цвет: `red green yellow blue magenta cyan white` или ANSI-код (`31`, `1;33`, `38;5;196`). По умолчанию `red`. |
 | `-t, --title=N`     | Блок-заголовок: `1/true/yes/on` (по умолчанию) или `0/false/no/off`. |
 | `--no-title`        | То же, что `--title=0`. |
+| `-s, --slow`        | Построчный вывод с задержкой (по умолчанию `0.03s` на строку). |
+| `-d, --delay=N`     | Задержка между строками в секундах. Включает `--slow`, если режим не задан. Дробные значения ок. |
+| `-S, --slow-chars`  | Посимвольный вывод с задержкой (по умолчанию `0.003s` на символ). |
+| `--char-delay=N`    | Задержка между символами в секундах. Включает `--slow-chars`, если режим не задан. |
 | `-h, --help`        | Справка. |
 | `-V, --version`     | Версия. |
+
+Режимы `--slow` и `--slow-chars` взаимоисключающие — побеждает последний указанный. `--delay` / `--char-delay` включают соответствующий режим, только если он ещё не задан явно.
 
 ### Примеры
 
@@ -105,6 +113,12 @@ nkspfetch --color=green
 nkspfetch -c cyan --no-title
 nkspfetch --color='1;33'         # жирный жёлтый
 nkspfetch --color='38;5;196'     # 256-цветный красный
+
+nkspfetch --slow                 # построчно, 0.03s
+nkspfetch --slow --delay=0.1     # построчно, 0.1s
+nkspfetch --slow-chars           # посимвольно, 0.003s
+nkspfetch --slow-chars --char-delay=0.01
+nkspfetch --char-delay=0.001 --color=cyan
 ```
 
 ## Разработка
@@ -120,4 +134,4 @@ make clean       # убрать bin/
 
 ## Лицензия
 
-MIT
+GNU-GPLv2
